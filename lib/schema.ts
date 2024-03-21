@@ -67,7 +67,7 @@ export const skills = pgTable('skills', {
 })
 
 export const usersToSkills = pgTable(
-  'users to skills',
+  'users_to_skills',
   {
     userId: text('user_id').notNull(),
     skillId: text('skill_id').notNull(),
