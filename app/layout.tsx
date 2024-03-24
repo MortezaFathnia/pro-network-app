@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { Notifications } from "@mantine/notifications";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +30,8 @@ export default async function RootLayout({
       </head>
       <body className={inter.className}>
         <MantineProvider defaultColorScheme="dark">
-          {children}
+          <Notifications/>
+            {children}
         </MantineProvider>
       </body>
     </html>

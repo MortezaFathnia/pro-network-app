@@ -16,7 +16,8 @@ export const users = pgTable("user", {
   image: text("image"),
   firstName: text('first_name'),
   lastName: text('last_name'),
-  jobTitle: text('job_title')
+  jobTitle: text('job_title'),
+  bio:text('bio')
 })
 
 export const accounts = pgTable(
@@ -35,6 +36,7 @@ export const accounts = pgTable(
     scope: text("scope"),
     id_token: text("id_token"),
     session_state: text("session_state"),
+    
   },
   (account) => ({
     compoundKey: primaryKey({ columns: [account.provider, account.providerAccountId] }),
