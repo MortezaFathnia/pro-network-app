@@ -55,3 +55,45 @@ export async function updateUser(
     success: "Update user success",
   };
 }
+
+const UpdateSkillRatingSchema=z.object({
+  skillId:z.string().uuid(),
+  rating:z.number().min(1).max(5)
+})
+
+interface UpdateSkillRatingState{
+  errors?:{
+    skillId?:string[],
+    rating?:string[],
+  };
+  message?:string;
+  success?:string;
+}
+
+export async function updateSkillRating(
+  prevState:UpdateSkillRatingState,
+  formData:FormData):Promise<UpdateSkillRatingState> {
+  const session=await getServerSession(authOptions);
+
+  const validatedFields=UpdateSkillRatingSchema.safeParse({
+    skillId:formData.get('skillId'),
+    rating:parseInt(formData.get('rating')?.toString()!),
+  });
+
+  if(!validatedFields.success){
+    return{
+      errors:validatedFields.error.flatten().fieldErrors,
+      message:'update skill error',
+    }
+  }
+
+  await db
+  .update(usersToSkills)
+  .set({rating:validatedFields.data.rating})
+  .where(and(eq(usersToSkills.skillId,validatedFields.data.skillId),eq(usersToSkills.userId,session?.user.id)))
+
+  revalidatePath('/dashboard/profile/skills')
+  return{
+    success:'Update skill success'
+  }
+}
