@@ -16,5 +16,6 @@ const config: Config = {
     },
   },
   plugins: [],
+  darkMode:['class','[data-mantine-color-sheme="dark"]']
 };
 export default config;
