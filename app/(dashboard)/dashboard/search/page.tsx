@@ -37,7 +37,8 @@ async function fuzzySearch(query: string) {
 
 export default async function Page({ searchParams }: Props) {
   const { query } = searchParams;
-  const users = await fuzzySearch(query);
+  const users = await getUsers(query);
+  // const users = await fuzzySearch(query);
 
   return (
     <div>

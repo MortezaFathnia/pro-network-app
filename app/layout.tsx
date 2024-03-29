@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import '@mantine/core/styles.css';
-import '@mantine/notifications/styles.css';
-import '@mantine/tiptap/styles.css';
-import '@/styles/editor.css'
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
+import "@mantine/tiptap/styles.css";
+import "@mantine/charts/styles.css";
+import "@/styles/editor.css";
 
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import { Notifications } from "@mantine/notifications";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,18 +24,18 @@ const theme = createTheme({
 
 export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" className="dark">
       <head>
         <ColorSchemeScript />
       </head>
       <body className={inter.className}>
-        <MantineProvider  theme={theme} defaultColorScheme="dark">
-          <Notifications/>
-            {children}
+        <MantineProvider theme={theme} defaultColorScheme="dark">
+          <Notifications />
+          {children}
         </MantineProvider>
       </body>
     </html>
