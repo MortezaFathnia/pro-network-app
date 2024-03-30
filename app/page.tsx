@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="flex flex-col w-screen h-screen items-center justify-center gap-5">
       <IconBriefcase />
-      <div className={`font-bold ${roboto.className}`}>Prefessional Network</div>
+      <div className={`font-bold ${roboto.className}`}>Professional Network</div>
       <Link href='/signin'>Sign In</Link>
     </div>
   );
