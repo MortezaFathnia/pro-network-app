@@ -2,7 +2,7 @@ import {db, pool} from '@/lib/db'
 import { usersToSkills } from '@/lib/schema';
 import { NewUserToSkill } from '@/lib/types';
 
-export async function main(){
+export default async function main(){
     const users=await db.query.users.findMany();
     const skills=await db.query.skills.findMany();
 
@@ -20,7 +20,10 @@ export async function main(){
             await db.insert(usersToSkills).values(NewUserToSkills).onConflictDoNothing();
         }
     }
-    pool.end();
 }
 
-main();
+
+if (require.main === module) {
+    main();
+    pool.end();
+}

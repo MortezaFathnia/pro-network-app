@@ -11,7 +11,7 @@ const data=[
     'Vercel'
 ]
 
-async function  main() {
+export default async function  main() {
     for(let skill of data){
         const newSkill:NewSkill={
             id:crypto.randomUUID(),
@@ -19,7 +19,10 @@ async function  main() {
         }
         await db.insert(skills).values(newSkill).onConflictDoNothing();
     }
-    pool.end()
 }
 
-main()
+
+if (require.main === module) {
+    main();
+    pool.end();
+}
